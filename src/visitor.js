@@ -60,6 +60,10 @@ export class EdgeVisitor extends BaseVisitor {
 
   openingTag(ctx) {
     const tagName = ctx.TAG_NAME[0].image;
+    const edgeProps = ctx.edgeProps
+      ? ctx.edgeProps.map((prop) => this.visit(prop))
+      : [];
+
     const attributes = ctx.attribute
       ? ctx.attribute.map((attr) => this.visit(attr))
       : [];
@@ -70,6 +74,7 @@ export class EdgeVisitor extends BaseVisitor {
       return {
         type: "selfClosingTag",
         tagName,
+        edgeProps,
         attributes,
         start,
         end,
@@ -79,6 +84,7 @@ export class EdgeVisitor extends BaseVisitor {
     return {
       type: "openingTag",
       tagName,
+      edgeProps,
       attributes,
       start,
       end,
@@ -184,5 +190,12 @@ export class EdgeVisitor extends BaseVisitor {
     const start = ctx.EDGE_TAG[0].startOffset;
     const end = ctx.EDGE_TAG[0].endOffset;
     return { type: "edgeTag", value, start, end };
+  }
+
+  edgeProps(ctx) {
+    const value = ctx.EDGE_PROPS[0].image;
+    const start = ctx.EDGE_PROPS[0].startOffset;
+    const end = ctx.EDGE_PROPS[0].endOffset;
+    return { type: "edgeProps", value, start, end };
   }
 }

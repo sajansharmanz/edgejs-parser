@@ -18,12 +18,12 @@ import {
   TAG_OPEN,
   TAG_SLASH_CLOSE,
   TAG_SLASH,
-  TAG_WHITESPACE,
   EDGE_COMMENT,
   EDGE_MUSTACHE,
   EDGE_SAFE_MUSTACHE,
   EDGE_ESCAPED_MUSTACHE,
   EDGE_TAG,
+  EDGE_PROPS,
 } from "./tokens";
 
 export class EdgeParser extends CstParser {
@@ -72,11 +72,14 @@ export class EdgeParser extends CstParser {
       $.CONSUME(TAG_OPEN);
       $.CONSUME(TAG_NAME);
       $.MANY(() => {
-        $.SUBRULE($.attribute);
+        $.OR([
+          { ALT: () => $.SUBRULE($.edgeProps) },
+          { ALT: () => $.SUBRULE($.attribute) },
+        ]);
       });
-      $.OR([
-        { ALT: () => $.CONSUME(TAG_SLASH_CLOSE) },
-        { ALT: () => $.CONSUME(TAG_CLOSE) },
+      $.OR1([
+        { ALT: () => $.CONSUME1(TAG_SLASH_CLOSE) },
+        { ALT: () => $.CONSUME1(TAG_CLOSE) },
       ]);
     });
 
@@ -143,6 +146,10 @@ export class EdgeParser extends CstParser {
 
     $.RULE("edgeTag", () => {
       $.CONSUME(EDGE_TAG);
+    });
+
+    $.RULE("edgeProps", () => {
+      $.CONSUME(EDGE_PROPS);
     });
 
     this.performSelfAnalysis();
