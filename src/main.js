@@ -18,5 +18,6 @@ export default function parse(text) {
     );
   }
 
-  return visitor.visit(cst);
+  const ast = visitor.visit(cst);
+  return ast;
 }

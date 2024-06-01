@@ -66,7 +66,7 @@ export class EdgeVisitor extends BaseVisitor {
     const start = ctx.TAG_NAME[0].startOffset;
     const end = ctx.TAG_NAME[0].endOffset;
 
-    if (ctx.TAG_SLASH_CLOSE) {
+    if (["input", "meta", "link"].includes(tagName) || ctx.TAG_SLASH_CLOSE) {
       return {
         type: "selfClosingTag",
         tagName,
