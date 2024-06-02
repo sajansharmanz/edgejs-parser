@@ -152,7 +152,7 @@ export const EDGE_TAG = createToken({
 
 export const EDGE_PROPS = createToken({
   name: "EDGE_PROPS",
-  pattern: /{{\s*\$props\.\s*[^}]*\s*}}/,
+  pattern: /{{\s*\$props\.\s*(?:[^}]|}(?!}))*\s*}}/,
 });
 
 export const lexerDefinition = {
