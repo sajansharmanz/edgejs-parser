@@ -91,7 +91,7 @@ export const TAG_EQUALS = createToken({
 export const TAG_NAME = createToken({
   name: "TAG_NAME",
   pattern:
-    /[a-zA-Z\u2070-\u218F\u2C00-\u2FEF\u3001-\uD7FF\uF900-\uFDCF\uFDF0-\uFFFD][-\u00B7\u0300-\u036F\u203F-\u2040.0-9a-zA-Z]*/,
+    /[:@a-zA-Z\u2070-\u218F\u2C00-\u2FEF\u3001-\uD7FF\uF900-\uFDCF\uFDF0-\uFFFD][:\.\-@\u00B7\u0300-\u036F\u203F-\u2040.0-9a-zA-Z]*/,
 });
 
 export const TAG_WHITESPACE = createToken({
