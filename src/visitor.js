@@ -71,7 +71,22 @@ export class EdgeVisitor extends BaseVisitor {
     const end = ctx.TAG_NAME[0].endOffset;
 
     if (
-      ["input", "meta", "link", "img"].includes(tagName) ||
+      [
+        "area",
+        "base",
+        "br",
+        "col",
+        "embed",
+        "hr",
+        "img",
+        "input",
+        "link",
+        "meta",
+        "param",
+        "source",
+        "track",
+        "wbr",
+      ].includes(tagName) ||
       ctx.TAG_SLASH_CLOSE
     ) {
       return {
