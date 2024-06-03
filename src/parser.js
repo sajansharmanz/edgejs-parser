@@ -74,6 +74,7 @@ export class EdgeParser extends CstParser {
       $.MANY(() => {
         $.OR([
           { ALT: () => $.SUBRULE($.edgeProps) },
+          { ALT: () => $.SUBRULE($.edgeMustache) },
           { ALT: () => $.SUBRULE($.attribute) },
         ]);
       });

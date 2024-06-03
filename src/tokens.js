@@ -182,6 +182,7 @@ export const lexerDefinition = {
       TAG_SLASH,
       TAG_EQUALS,
       EDGE_PROPS,
+      EDGE_MUSTACHE,
       TAG_NAME,
       TAG_WHITESPACE,
     ],

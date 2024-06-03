@@ -60,6 +60,11 @@ export class EdgeVisitor extends BaseVisitor {
 
   openingTag(ctx) {
     const tagName = ctx.TAG_NAME[0].image;
+
+    const edgeMustaches = ctx.edgeMustache
+      ? ctx.edgeMustache.map((prop) => this.visit(prop))
+      : [];
+
     const edgeProps = ctx.edgeProps
       ? ctx.edgeProps.map((prop) => this.visit(prop))
       : [];
@@ -93,6 +98,7 @@ export class EdgeVisitor extends BaseVisitor {
         type: "selfClosingTag",
         tagName,
         edgeProps,
+        edgeMustaches,
         attributes,
         start,
         end,
@@ -103,6 +109,7 @@ export class EdgeVisitor extends BaseVisitor {
       type: "openingTag",
       tagName,
       edgeProps,
+      edgeMustaches,
       attributes,
       start,
       end,
