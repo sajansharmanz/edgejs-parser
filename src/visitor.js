@@ -91,11 +91,30 @@ export class EdgeVisitor extends BaseVisitor {
         "source",
         "track",
         "wbr",
+        // Below are for SVGs
+        "rect",
+        "circle",
+        "ellipse",
+        "line",
+        "polygon",
+        "polyline",
+        "path",
+        "image",
+        "feGaussianBlur",
+        "feDropShadow",
+        "feOffset",
+        "feBlend",
+        "feColorMatrix",
+        "stop",
+        "set",
+        "animate",
+        "animateTransform",
+        "animateMotion",
       ].includes(tagName) ||
       ctx.TAG_SLASH_CLOSE
     ) {
       return {
-        type: "selfClosingTag",
+        type: "voidTag",
         tagName,
         edgeProps,
         edgeMustaches,
