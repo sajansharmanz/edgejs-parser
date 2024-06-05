@@ -26,4 +26,4 @@ If you want to see the format of the AST read the `visitor.js` file.
 
 As with most open source projects my time is limited and I do the best I can.
 
-If you spot an issue, feel free to open a Bug and I will get too it when I can, or even better yet feel free to open a PR
+If you spot an issue, feel free to open a Bug and I will get too it when I can, or even better yet feel free to open a PR.
