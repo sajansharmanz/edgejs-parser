@@ -186,6 +186,7 @@ export const lexerDefinition = {
       TAG_SLASH_CLOSE,
       TAG_SLASH,
       TAG_EQUALS,
+      EDGE_COMMENT,
       EDGE_PROP,
       EDGE_MUSTACHE,
       EDGE_TAG_PROP,

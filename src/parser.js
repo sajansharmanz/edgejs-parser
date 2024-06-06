@@ -78,6 +78,7 @@ export class EdgeParser extends CstParser {
           { ALT: () => $.SUBRULE($.attribute) },
           { ALT: () => $.SUBRULE($.edgeProp) },
           { ALT: () => $.SUBRULE($.edgeMustache) },
+          { ALT: () => $.SUBRULE($.edgeComment) },
         ]);
       });
       $.OR1([

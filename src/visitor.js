@@ -77,6 +77,10 @@ export class EdgeVisitor extends BaseVisitor {
       ? ctx.attribute.map((attr) => this.visit(attr))
       : [];
 
+    const comments = ctx.edgeComment
+      ? ctx.edgeComment.map((comment) => this.visit(comment))
+      : [];
+
     const start = ctx.TAG_NAME[0].startOffset;
     const end = ctx.TAG_NAME[0].endOffset;
 
@@ -125,6 +129,7 @@ export class EdgeVisitor extends BaseVisitor {
         edgeMustaches,
         edgeTagProps,
         attributes,
+        comments,
         start,
         end,
       };
@@ -137,6 +142,7 @@ export class EdgeVisitor extends BaseVisitor {
       edgeMustaches,
       edgeTagProps,
       attributes,
+      comments,
       start,
       end,
     };
