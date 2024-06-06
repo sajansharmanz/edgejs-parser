@@ -65,13 +65,18 @@ export class EdgeVisitor extends BaseVisitor {
       ? ctx.edgeMustache.map((prop) => this.visit(prop))
       : [];
 
-    const edgeProps = ctx.edgeProps
-      ? ctx.edgeProps.map((prop) => this.visit(prop))
+    const edgeProps = ctx.edgeProp
+      ? ctx.edgeProp.map((prop) => this.visit(prop))
+      : [];
+
+    const edgeTagProps = ctx.edgeTagProp
+      ? ctx.edgeTagProp.map((prop) => this.visit(prop))
       : [];
 
     const attributes = ctx.attribute
       ? ctx.attribute.map((attr) => this.visit(attr))
       : [];
+
     const start = ctx.TAG_NAME[0].startOffset;
     const end = ctx.TAG_NAME[0].endOffset;
 
@@ -118,6 +123,7 @@ export class EdgeVisitor extends BaseVisitor {
         tagName,
         edgeProps,
         edgeMustaches,
+        edgeTagProps,
         attributes,
         start,
         end,
@@ -129,6 +135,7 @@ export class EdgeVisitor extends BaseVisitor {
       tagName,
       edgeProps,
       edgeMustaches,
+      edgeTagProps,
       attributes,
       start,
       end,
@@ -142,7 +149,7 @@ export class EdgeVisitor extends BaseVisitor {
     const end = ctx.ATTVALUE_VALUE
       ? ctx.ATTVALUE_VALUE[0].endOffset
       : ctx.TAG_NAME[0].endOffset;
-    return { attributeName, attributeValue, start, end };
+    return { type: "attribute", attributeName, attributeValue, start, end };
   }
 
   closingTag(ctx) {
@@ -236,10 +243,17 @@ export class EdgeVisitor extends BaseVisitor {
     return { type: "edgeTag", value, start, end };
   }
 
-  edgeProps(ctx) {
-    const value = ctx.EDGE_PROPS[0].image;
-    const start = ctx.EDGE_PROPS[0].startOffset;
-    const end = ctx.EDGE_PROPS[0].endOffset;
-    return { type: "edgeProps", value, start, end };
+  edgeProp(ctx) {
+    const value = ctx.EDGE_PROP[0].image;
+    const start = ctx.EDGE_PROP[0].startOffset;
+    const end = ctx.EDGE_PROP[0].endOffset;
+    return { type: "edgeProp", value, start, end };
+  }
+
+  edgeTagProp(ctx) {
+    const value = ctx.EDGE_TAG_PROP[0].image;
+    const start = ctx.EDGE_TAG_PROP[0].startOffset;
+    const end = ctx.EDGE_TAG_PROP[0].endOffset;
+    return { type: "edgeTagProp", value, start, end };
   }
 }

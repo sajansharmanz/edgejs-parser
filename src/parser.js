@@ -23,7 +23,8 @@ import {
   EDGE_SAFE_MUSTACHE,
   EDGE_ESCAPED_MUSTACHE,
   EDGE_TAG,
-  EDGE_PROPS,
+  EDGE_PROP,
+  EDGE_TAG_PROP,
 } from "./tokens";
 
 export class EdgeParser extends CstParser {
@@ -73,9 +74,10 @@ export class EdgeParser extends CstParser {
       $.CONSUME(TAG_NAME);
       $.MANY(() => {
         $.OR([
-          { ALT: () => $.SUBRULE($.edgeProps) },
-          { ALT: () => $.SUBRULE($.edgeMustache) },
+          { ALT: () => $.SUBRULE($.edgeTagProp) },
           { ALT: () => $.SUBRULE($.attribute) },
+          { ALT: () => $.SUBRULE($.edgeProp) },
+          { ALT: () => $.SUBRULE($.edgeMustache) },
         ]);
       });
       $.OR1([
@@ -149,8 +151,12 @@ export class EdgeParser extends CstParser {
       $.CONSUME(EDGE_TAG);
     });
 
-    $.RULE("edgeProps", () => {
-      $.CONSUME(EDGE_PROPS);
+    $.RULE("edgeProp", () => {
+      $.CONSUME(EDGE_PROP);
+    });
+
+    $.RULE("edgeTagProp", () => {
+      $.CONSUME(EDGE_TAG_PROP);
     });
 
     this.performSelfAnalysis();
