@@ -25,6 +25,7 @@ import {
   EDGE_TAG,
   EDGE_PROP,
   EDGE_TAG_PROP,
+  LINE_BREAK,
 } from "./tokens";
 
 export class EdgeParser extends CstParser {
@@ -42,6 +43,7 @@ export class EdgeParser extends CstParser {
     $.RULE("content", () => {
       $.OR([
         { ALT: () => $.CONSUME(HTML_TEXT) },
+        { ALT: () => $.CONSUME(LINE_BREAK) },
         { ALT: () => $.SUBRULE($.element) },
         { ALT: () => $.SUBRULE($.scriptlet) },
         { ALT: () => $.SUBRULE($.htmlComment) },

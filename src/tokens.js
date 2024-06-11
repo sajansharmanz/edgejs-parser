@@ -35,8 +35,13 @@ export const SCRIPTLET = createToken({
 
 export const SEA_WS = createToken({
   name: "SEA_WS",
-  pattern: /[ \t\r\n]+/,
+  pattern: /[ \t]+/,
   group: Lexer.SKIPPED,
+});
+
+export const LINE_BREAK = createToken({
+  name: "LINE_BREAK",
+  pattern: /[\r?\n]+/,
 });
 
 export const SCRIPT_OPEN = createToken({
@@ -131,17 +136,17 @@ export const EDGE_COMMENT = createToken({
 
 export const EDGE_MUSTACHE = createToken({
   name: "EDGE_MUSTACHE",
-  pattern: /{{[\s\S]*?}}/,
+  pattern: /{{[\s\S]*?}}\s*/,
 });
 
 export const EDGE_SAFE_MUSTACHE = createToken({
   name: "EDGE_SAFE_MUSTACHE",
-  pattern: /{{{[\s\S]*?}}}/,
+  pattern: /{{{[\s\S]*?}}}\s*/,
 });
 
 export const EDGE_ESCAPED_MUSTACHE = createToken({
   name: "EDGE_ESCAPED_MUSTACHE",
-  pattern: /@{{[\s\S]*?}}/,
+  pattern: /@{{[\s\S]*?}}\s*/,
 });
 
 export const EDGE_TAG = createToken({
@@ -170,6 +175,7 @@ export const lexerDefinition = {
       CDATA,
       DTD,
       SCRIPTLET,
+      LINE_BREAK,
       SEA_WS,
       SCRIPT_OPEN,
       STYLE_OPEN,

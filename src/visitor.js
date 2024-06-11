@@ -30,6 +30,15 @@ export class EdgeVisitor extends BaseVisitor {
       };
     }
 
+    if (ctx.LINE_BREAK) {
+      return {
+        type: "linebreak",
+        value: ctx.LINE_BREAK[0].image,
+        start: ctx.LINE_BREAK[0].startOffset,
+        end: ctx.LINE_BREAK[0].endOffset,
+      };
+    }
+
     const node =
       ctx.element ||
       ctx.scriptlet ||
