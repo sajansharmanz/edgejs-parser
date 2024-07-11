@@ -41,7 +41,7 @@ export const SEA_WS = createToken({
 
 export const LINE_BREAK = createToken({
   name: "LINE_BREAK",
-  pattern: /[\r?\n]+/,
+  pattern: /\r?\n/,
 });
 
 export const SCRIPT_OPEN = createToken({
