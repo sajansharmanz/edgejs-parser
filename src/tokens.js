@@ -64,7 +64,7 @@ export const TAG_OPEN = createToken({
 
 export const HTML_TEXT = createToken({
   name: "HTML_TEXT",
-  pattern: /[^<@{]+/,
+  pattern: /[^<@]+/,
   line_breaks: true,
 });
 
@@ -162,7 +162,7 @@ export const EDGE_PROP = createToken({
 
 export const EDGE_TAG_PROP = createToken({
   name: "EDGE_TAG_PROP",
-  pattern: /@(if|elseif|else|each)\([^)]*\)\s*([\s\S]*?)@end/,
+  pattern: /@(if|elseif|else|each|flashMessage)\([^)]*\)\s*([\s\S]*?)@end/,
 });
 
 export const lexerDefinition = {
