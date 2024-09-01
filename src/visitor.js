@@ -4,9 +4,62 @@ const parser = new EdgeParser();
 const BaseVisitor = parser.getBaseCstVisitorConstructor();
 
 export class EdgeVisitor extends BaseVisitor {
+  #inlineTags = new Set([
+    "area",
+    "base",
+    "br",
+    "col",
+    "embed",
+    "hr",
+    "img",
+    "input",
+    "link",
+    "meta",
+    "param",
+    "source",
+    "track",
+    "wbr",
+    // Below are for SVGs
+    "animateMotion",
+    "animateTransform",
+    "animate",
+    "circle",
+    "ellipse",
+    "feGaussianBlur",
+    "feDropShadow",
+    "feOffset",
+    "feBlend",
+    "feColorMatrix",
+    "feComposite",
+    "feDisplacementMap",
+    "feFlood",
+    "feImage",
+    "feMergeNode",
+    "feMorphology",
+    "fePointLight",
+    "feSpotLight",
+    "feTile",
+    "feTurbulence",
+    "image",
+    "line",
+    "mpath",
+    "path",
+    "polygon",
+    "polyline",
+    "rect",
+    "set",
+    "stop",
+    "use",
+    "view",
+  ]);
+
   constructor() {
     super();
     this.validateVisitor();
+  }
+
+  #isInlineTag(tagName) {
+    return this.#inlineTags.has(tagName);
   }
 
   document(ctx) {
@@ -93,44 +146,7 @@ export class EdgeVisitor extends BaseVisitor {
     const start = ctx.TAG_NAME[0].startOffset;
     const end = ctx.TAG_NAME[0].endOffset;
 
-    if (
-      [
-        "area",
-        "base",
-        "br",
-        "col",
-        "embed",
-        "hr",
-        "img",
-        "input",
-        "link",
-        "meta",
-        "param",
-        "source",
-        "track",
-        "wbr",
-        // Below are for SVGs
-        "rect",
-        "circle",
-        "ellipse",
-        "line",
-        "polygon",
-        "polyline",
-        "path",
-        "image",
-        "feGaussianBlur",
-        "feDropShadow",
-        "feOffset",
-        "feBlend",
-        "feColorMatrix",
-        "stop",
-        "set",
-        "animate",
-        "animateTransform",
-        "animateMotion",
-      ].includes(tagName) ||
-      ctx.TAG_SLASH_CLOSE
-    ) {
+    if (this.#isInlineTag(tagName) || ctx.TAG_SLASH_CLOSE) {
       return {
         type: "voidTag",
         tagName,
@@ -171,6 +187,13 @@ export class EdgeVisitor extends BaseVisitor {
     const tagName = ctx.TAG_NAME[0].image;
     const start = ctx.TAG_OPEN[0].startOffset;
     const end = ctx.TAG_CLOSE[0].endOffset;
+
+    if (this.#isInlineTag(tagName)) {
+      return {
+        type: "doNotPrint",
+      };
+    }
+
     return { type: "closingTag", tagName, start, end };
   }
 
