@@ -155,11 +155,6 @@ export const EDGE_TAG = createToken({
     /@(?:!?\w+(?:\.\w+)*)\s*(?:\((?:[^)(]+|\((?:[^)(]+|\([^)(]*\))*\))*\))?/,
 });
 
-export const EDGE_PROP = createToken({
-  name: "EDGE_PROP",
-  pattern: /{{\s*\$props\.\s*(?:[^}]|}(?!}))*\s*}}/,
-});
-
 export const EDGE_TAG_PROP = createToken({
   name: "EDGE_TAG_PROP",
   pattern: /@(if|elseif|else|each|flashMessage)\([^)]*\)\s*([\s\S]*?)@end/,
@@ -193,7 +188,7 @@ export const lexerDefinition = {
       TAG_SLASH,
       TAG_EQUALS,
       EDGE_COMMENT,
-      EDGE_PROP,
+      EDGE_SAFE_MUSTACHE,
       EDGE_MUSTACHE,
       EDGE_TAG_PROP,
       TAG_NAME,

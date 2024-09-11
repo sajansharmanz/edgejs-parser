@@ -123,12 +123,12 @@ export class EdgeVisitor extends BaseVisitor {
   openingTag(ctx) {
     const tagName = ctx.TAG_NAME[0].image;
 
-    const edgeMustaches = ctx.edgeMustache
-      ? ctx.edgeMustache.map((prop) => this.visit(prop))
+    const edgeSafeMustaches = ctx.edgeSafeMustache
+      ? ctx.edgeSafeMustache.map((prop) => this.visit(prop))
       : [];
 
-    const edgeProps = ctx.edgeProp
-      ? ctx.edgeProp.map((prop) => this.visit(prop))
+    const edgeMustaches = ctx.edgeMustache
+      ? ctx.edgeMustache.map((prop) => this.visit(prop))
       : [];
 
     const edgeTagProps = ctx.edgeTagProp
@@ -150,7 +150,7 @@ export class EdgeVisitor extends BaseVisitor {
       return {
         type: "voidTag",
         tagName,
-        edgeProps,
+        edgeSafeMustaches,
         edgeMustaches,
         edgeTagProps,
         attributes,
@@ -163,7 +163,7 @@ export class EdgeVisitor extends BaseVisitor {
     return {
       type: "openingTag",
       tagName,
-      edgeProps,
+      edgeSafeMustaches,
       edgeMustaches,
       edgeTagProps,
       attributes,
@@ -279,13 +279,6 @@ export class EdgeVisitor extends BaseVisitor {
     const start = ctx.EDGE_TAG[0].startOffset;
     const end = ctx.EDGE_TAG[0].endOffset;
     return { type: "edgeTag", value, start, end };
-  }
-
-  edgeProp(ctx) {
-    const value = ctx.EDGE_PROP[0].image;
-    const start = ctx.EDGE_PROP[0].startOffset;
-    const end = ctx.EDGE_PROP[0].endOffset;
-    return { type: "edgeProp", value, start, end };
   }
 
   edgeTagProp(ctx) {
