@@ -1,6 +1,6 @@
 {
   "name": "edgejs-parser",
-  "version": "0.2.12",
+  "version": "0.2.13",
   "description": "EdgeJS Parser",
   "keywords": [
     "edge",
@@ -35,8 +35,8 @@
     "format": "prettier . --write"
   },
   "devDependencies": {
-    "prettier": "^3.3.3",
-    "vite": "^5.4.11"
+    "prettier": "^3.4.2",
+    "vite": "^6.0.3"
   },
   "dependencies": {
     "chevrotain": "^11.0.3"
