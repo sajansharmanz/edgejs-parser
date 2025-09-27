@@ -151,8 +151,7 @@ export const EDGE_ESCAPED_MUSTACHE = createToken({
 
 export const EDGE_TAG = createToken({
   name: "EDGE_TAG",
-  pattern:
-    /@(?:!?\w+(?:\.\w+)*)\s*(?:\((?:[^)(]+|\((?:[^)(]+|\([^)(]*\))*\))*\))?/,
+  pattern: /@(?:!?\w+(?:\.\w+)*)\s*(?:\((?:[^)(]+|\((?:[^)(]+|\([^)(]*\))*\))*\))?~?/,
 });
 
 export const EDGE_TAG_PROP = createToken({
