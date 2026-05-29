@@ -1,3 +1,11 @@
+# No longer maintained as of 29 May 2026
+
+The AdonisJS team have finally got around to creating their own fully supported and maintained version of a prettier plugin. Therefore, this package will no longer be maintained.
+
+It is recommended to update your `@adonisjs/prettier-config` to the latest to enable its use.
+
+---
+
 # EdgeJS Parser
 
 This is a small parser for HTML and EdgeJS.
